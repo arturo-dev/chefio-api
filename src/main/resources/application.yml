@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://java:123456Qwe@chefio-api-shard-00-00-nqiit.gcp.mongodb.net:27017,chefio-api-shard-00-01-nqiit.gcp.mongodb.net:27017,chefio-api-shard-00-02-nqiit.gcp.mongodb.net:27017/test?ssl=true&replicaSet=chefio-api-shard-0&authSource=admin&retryWrites=true&w=majority
+      database: test 
+      
+logging:
+  level:
+    ROOT: INFO
