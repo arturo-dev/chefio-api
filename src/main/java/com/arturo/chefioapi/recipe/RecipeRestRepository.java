@@ -15,7 +15,12 @@ public interface RecipeRestRepository extends MongoRepository<Recipe, String> {
 	@Query(value = "{'title': { $regex : ?0, $options: 'i' } }")
 	Page<Recipe> findByTitle(@Param("param0") String title, Pageable page);
 	
-	@Query(value = "{ $where: 'this.ingredients.length > 0 && this.ingredients.filter(ing => { const list = ?0 || []; return list.includes(ing.item)}).length == this.ingredients.length' }")
+	@Query(value = "{ $where: "
+			+ "'this.ingredients.length > 0 "
+			+ "&& this.ingredients.filter(ing => { "
+				+ "const list = ?0 || []; "
+				+ "return list.filter(listItem => new RegExp(listItem).test(ing.item.toLowerCase()) ).length === 1"
+			+ "}).length == this.ingredients.length' }")
 	Page<Recipe> findByIngredients(@Param("param0") String[] ingredients, Pageable page);
 	
 }
