@@ -13,8 +13,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-//@Component
-//@Order(Ordered.HIGHEST_PRECEDENCE)
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CustomCorsFilter extends OncePerRequestFilter {
 
     @Value("${security.cors.origin}")
@@ -28,14 +28,19 @@ public class CustomCorsFilter extends OncePerRequestFilter {
 
     @Value("${security.cors.credential}")
     private boolean credential;
-
+    
+    @Value("${security.cors.prodOrigin}")
+    private String prodOrigin;
+    
     @Override
     protected void doFilterInternal(
             HttpServletRequest request, 
             HttpServletResponse response, 
             FilterChain filterChain
         ) throws ServletException, IOException {
-        response.setHeader("Access-Control-Allow-Origin", origin);
+    	
+        // response.setHeader("Access-Control-Allow-Origin", origin.contains(request.getHeader("Origin")) ? request.getHeader("Origin") : prodOrigin);
+    	response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Methods", method);
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", header);

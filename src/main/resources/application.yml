@@ -1,9 +1,8 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://arturo:123456Qwe@ds211108-a0.mlab.com:11108,ds211108-a1.mlab.com:11108/chef-io-prod?replicaSet=rs-ds211108
-      #uri: mongodb://java:123456Qwe@chefio-api-shard-00-00-nqiit.gcp.mongodb.net:27017,chefio-api-shard-00-01-nqiit.gcp.mongodb.net:27017,chefio-api-shard-00-02-nqiit.gcp.mongodb.net:27017/test?ssl=true&replicaSet=chefio-api-shard-0&authSource=admin&retryWrites=true&w=majority
-      #database: test
+      # uri: mongodb://arturo:123456Qwe@ds211108-a0.mlab.com:11108,ds211108-a1.mlab.com:11108/chef-io-prod?replicaSet=rs-ds211108
+      uri: mongodb://arturo:123456Qwe@ds241570.mlab.com:41570/chefio-api-dev
   jackson:
     serialization:
       fail-on-empty-beans: false
@@ -14,8 +13,22 @@ logging:
     org.springframework.data.mongodb: DEBUG
     
 security:
+  oauth2:
+    resource:
+      filterOrder: 3
+  signingKey: HolaHola
+  encodingStrength: 256
+  securityRealm: HolaRealm
+  jwt:
+    clientId: clientId
+    clientSecret: "clientSecret"
+    grantType: password
+    scopeRead: read
+    scopeWrite: write
+    resourceIds: oauth2-server
   cors:
     origin: "capacitor://localhost, ionic://localhost, http://localhost, http://localhost:8080, http://localhost:8100"
     header: "*"
     method: "GET, POST, PUT, PATCH, DELETE, OPTIONS"
     credential: true
+    prodOrigin: "https://chefio-api-prod.herokuapp.com"

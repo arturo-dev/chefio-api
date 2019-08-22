@@ -1,8 +1,12 @@
 package com.arturo.chefioapi.recipe.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import com.arturo.chefioapi.user.User;
 
 public class Recipe {
 
@@ -15,6 +19,10 @@ public class Recipe {
 	private String img;
 	private ArrayList<Ingredient> ingredients = new ArrayList<>();
 	private ArrayList<Step> steps = new ArrayList<>();
+	private Date creationDate;
+	
+	@DBRef(lazy = true)
+    private User user;
 
 	public String getId() {
 		return id;
@@ -70,6 +78,22 @@ public class Recipe {
 
 	public void setSteps(ArrayList<Step> steps) {
 		this.steps = steps;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
