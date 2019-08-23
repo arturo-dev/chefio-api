@@ -1,8 +1,8 @@
 spring:
   data:
     mongodb:
-      # uri: mongodb://arturo:123456Qwe@ds211108-a0.mlab.com:11108,ds211108-a1.mlab.com:11108/chef-io-prod?replicaSet=rs-ds211108
-      uri: mongodb://arturo:123456Qwe@ds241570.mlab.com:41570/chefio-api-dev
+      uri: mongodb://arturo:123456Qwe@ds211108-a0.mlab.com:11108,ds211108-a1.mlab.com:11108/chef-io-prod?replicaSet=rs-ds211108
+      #uri: mongodb://arturo:123456Qwe@ds241570.mlab.com:41570/chefio-api-dev
   jackson:
     serialization:
       fail-on-empty-beans: false
@@ -10,7 +10,7 @@ spring:
 logging:
   level:
     ROOT: INFO
-    org.springframework.data.mongodb: DEBUG
+    org.springframework.data.mongodb: ERROR
     
 security:
   oauth2:
